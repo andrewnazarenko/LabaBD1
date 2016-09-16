@@ -14,7 +14,6 @@ def view_tovary():
         print i
 
 
-
 def view_all():
     for i in d1.keys():
         print i
@@ -26,13 +25,13 @@ def add_types():
     category = str(raw_input("Type category"))
     id = str(raw_input("Type id"))
     tovar_type = tip.tipTovara(name, category, id)
-    d1[tovar_type] = None
+    d1[tovar_type] = []
 
 
 def add_tovary():
     name = str(raw_input("Type name: "))
-    price = str(raw_input("Type price"))
-    date = str(raw_input("Type date"))
+    price = str(raw_input("Type price($)"))
+    date = str(raw_input("Type date(year)"))
     tovary = tovar.tovar(name, price, date)
     tovartype = d1.keys()
     for i in range(len(tovartype)):
@@ -86,11 +85,13 @@ def edit_tovary():
         "Seichas imya " + input1.name + ", esli vi jelayete pomenyat' ego, vvedite another one: ")
     if name != "":
         input1.name = name
-    price = raw_input(
-        "Seichas price " + input1.price + ", esli vi jelayete pomenyat' ee, vvedite another one: ")
-    if price != "":
+    try:
+        price = float(raw_input(
+            "Seichas price $" + input1.price + ", esli vi jelayete pomenyat' ee, vvedite another one: "))
         input1.price = price
-    date1 = raw_input("Seichas date1 " + input1.date1 + ", esli vi jelayete pomenyat' ego, vvedite another one: ")
+    except IOError as e:
+        pass
+    date1 = raw_input("Seichas date1 " + input1.date1 + " year1, esli vi jelayete pomenyat' ego, vvedite another one: ")
     if date1 != "":
         input1.date1 = date1
 
@@ -107,3 +108,6 @@ def load_from_file_please():
     d1 = pickle.load(na_file)
     na_file.close()
 
+
+def search_menu():
+    
