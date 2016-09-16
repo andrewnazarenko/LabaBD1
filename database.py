@@ -44,21 +44,57 @@ def add_tovary():
         d1[tovartype[type1]].append(tovary)
 
 def del_types():
-    for i in d1.keys():
-        del(i)
+    tovartype = d1.keys()
+    for i in range(len(tovartype)):
+        print str(i) + ". " + str(tovartype[i])
+    type1 = int(raw_input("Type category num:"))
+    del (d1[tovartype[type1]])
+
 
 def del_tovary():
-    return None
-
+    sum1 = sum(d1.values(), [])
+    for i in range(len(sum1)):
+        print str(i) + ". " + str(sum1[i])
+    input1 = sum1[int(raw_input("Which tovar do you want to delete?"))]
+    for i in d1.keys():
+        if input1 in d1[i]:
+            d1[i].remove(input1)
+            break
 
 def edit_types():
-    return None
+    tovartype = d1.keys()
+    for i in range(len(tovartype)):
+        print str(i) + ". " + str(tovartype[i])
+    type1 = int(raw_input("Which tovartype do you want to edit?"))
+    name = raw_input("Seichas imya " + tovartype[type1].name + ", esli vi jelayete pomenyat' ego, vvedite another one: " )
+    if name != "":
+        tovartype[type1].name = name
+    category = raw_input("Seichas category " + tovartype[type1].category + ", esli vi jelayete pomenyat' ee, vvedite another one: ")
+    if category != "":
+        tovartype[type1].category = category
+    id = raw_input("Seichas id " + tovartype[type1].id + ", esli vi jelayete pomenyat' ego, vvedite another one: ")
+    if id != "":
+        tovartype[type1].id = id
 
 
 def edit_tovary():
-    return None
+    sum1 = sum(d1.values(), [])
+    for i in range(len(sum1)):
+        print str(i) + ". " + str(sum1[i])
+    input1 = sum1[int(raw_input("Which tovar do you want to edit?"))]
+    name = raw_input(
+        "Seichas imya " + input1.name + ", esli vi jelayete pomenyat' ego, vvedite another one: ")
+    if name != "":
+        input1.name = name
+    price = raw_input(
+        "Seichas price " + input1.price + ", esli vi jelayete pomenyat' ee, vvedite another one: ")
+    if price != "":
+        input1.price = price
+    date1 = raw_input("Seichas date1 " + input1.date1 + ", esli vi jelayete pomenyat' ego, vvedite another one: ")
+    if date1 != "":
+        input1.date1 = date1
 
-
+    
 def save_into_file_please():
     na_file = open('backup.txt', 'w')
     pickle.dump(d1, na_file)
