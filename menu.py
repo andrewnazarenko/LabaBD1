@@ -10,27 +10,32 @@ def main_menu():
         print " 5.Search"
         print " 6.Exit"
 
-        in1 = int(input("Choose menu"))
+        try:
+            in1 = int(input("Choose menu"))
 
-        if in1 == 1:
-            view_menu()
+            if in1 == 1:
+                view_menu()
 
-        elif in1 == 2:
-            add_menu()
+            elif in1 == 2:
+                add_menu()
 
-        elif in1 == 3:
-            del_menu()
+            elif in1 == 3:
+                del_menu()
 
-        elif in1 == 4:
-            edit_menu()
+            elif in1 == 4:
+                edit_menu()
 
-        elif in1 == 5:
-            search_menu()
+            elif in1 == 5:
+                search_menu()
 
-        elif in1 == 6:
-            break
+            elif in1 == 6:
+                break
 
-        else: print "Unexpected answer"
+            else:
+                print "Unexpected answer"
+
+        except (NameError, SyntaxError) as e:
+            print "Unexpected answer"
 
 
 def view_menu():
@@ -103,5 +108,6 @@ def edit_menu():
 
 
 def search_menu():
-    print "search"
+   return None
+
 

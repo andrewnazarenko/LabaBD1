@@ -27,20 +27,31 @@ def add_types():
     tovar_type = tip.tipTovara(name, category, id)
     d1[tovar_type] = []
 
-
 def add_tovary():
     name = str(raw_input("Type name: "))
-    price = str(raw_input("Type price($)"))
+    flag = True
+    while flag :
+        try:
+            price = float(str(raw_input("Type price($)")))
+            flag = False
+        except  (NameError, SyntaxError, ValueError):
+            print "Wrong value, input float"
     date = str(raw_input("Type date(year)"))
     tovary = tovar.tovar(name, price, date)
     tovartype = d1.keys()
     for i in range(len(tovartype)):
         print str(i)+". " + str(tovartype[i])
-    type1 = int(raw_input("Type category num:"))
-    if d1[tovartype[type1]] == None:
-        d1[tovartype[type1]] = [tovary]
-    else:
-        d1[tovartype[type1]].append(tovary)
+    flag = True
+    while flag:
+        try:
+            type1 = int(raw_input("Type category num:"))
+            if d1[tovartype[type1]] == None:
+                d1[tovartype[type1]] = [tovary]
+            else:
+                d1[tovartype[type1]].append(tovary)
+            flag = False
+        except (NameError, SyntaxError, ValueError, IndexError):
+            print "Wrong id, choose the existing one"
 
 def del_types():
     tovartype = d1.keys()
@@ -64,37 +75,41 @@ def edit_types():
     tovartype = d1.keys()
     for i in range(len(tovartype)):
         print str(i) + ". " + str(tovartype[i])
-    type1 = int(raw_input("Which tovartype do you want to edit?"))
-    name = raw_input("Seichas imya " + tovartype[type1].name + ", esli vi jelayete pomenyat' ego, vvedite another one: " )
-    if name != "":
-        tovartype[type1].name = name
-    category = raw_input("Seichas category " + tovartype[type1].category + ", esli vi jelayete pomenyat' ee, vvedite another one: ")
-    if category != "":
-        tovartype[type1].category = category
-    id = raw_input("Seichas id " + tovartype[type1].id + ", esli vi jelayete pomenyat' ego, vvedite another one: ")
-    if id != "":
-        tovartype[type1].id = id
-
+    try:
+        type1 = int(raw_input("Which tovartype do you want to edit?"))
+        name = raw_input("Seichas imya " + tovartype[type1].name + ", esli vi jelayete pomenyat' ego, vvedite another one: " )
+        if name != "":
+            tovartype[type1].name = name
+        category = raw_input("Seichas category " + tovartype[type1].category + ", esli vi jelayete pomenyat' ee, vvedite another one: ")
+        if category != "":
+            tovartype[type1].category = category
+        id = raw_input("Seichas id " + tovartype[type1].id + ", esli vi jelayete pomenyat' ego, vvedite another one: ")
+        if id != "":
+            tovartype[type1].id = id
+    except ValueError as e:
+        print "Unexpected Error"
 
 def edit_tovary():
     sum1 = sum(d1.values(), [])
     for i in range(len(sum1)):
         print str(i) + ". " + str(sum1[i])
-    input1 = sum1[int(raw_input("Which tovar do you want to edit?"))]
-    name = raw_input(
-        "Seichas imya " + input1.name + ", esli vi jelayete pomenyat' ego, vvedite another one: ")
-    if name != "":
-        input1.name = name
     try:
-        price = float(raw_input(
-            "Seichas price $" + input1.price + ", esli vi jelayete pomenyat' ee, vvedite another one: "))
-        input1.price = price
-    except IOError as e:
-        pass
-    date1 = raw_input("Seichas date1 " + input1.date1 + " year1, esli vi jelayete pomenyat' ego, vvedite another one: ")
-    if date1 != "":
-        input1.date1 = date1
-
+        input1 = sum1[int(raw_input("Which tovar do you want to edit?"))]
+        name = raw_input(
+            "Seichas imya " + input1.name + ", esli vi jelayete pomenyat' ego, vvedite another one: ")
+        if name != "":
+            input1.name = name
+        try:
+            price = float(raw_input(
+                "Seichas price $" + input1.price + ", esli vi jelayete pomenyat' ee, vvedite another one: "))
+            input1.price = price
+        except IOError as e:
+            pass
+        date1 = raw_input("Seichas date1 " + input1.date1 + " year1, esli vi jelayete pomenyat' ego, vvedite another one: ")
+        if date1 != "":
+            input1.date1 = date1
+    except ValueError as e:
+        print "Unexpected Answer"
     
 def save_into_file_please():
     na_file = open('backup.txt', 'w')
@@ -109,5 +124,3 @@ def load_from_file_please():
     na_file.close()
 
 
-def search_menu():
-    
